@@ -3962,6 +3962,9 @@ void CHARACTER::mining(LPCHARACTER chLoad)
 	if (!chLoad)
 		return;
 
+	if (GetMapIndex() != chLoad->GetMapIndex() || DISTANCE_APPROX(GetX() - chLoad->GetX(), GetY() - chLoad->GetY()) > 1000)
+		return;
+
 	if (mining::GetRawOreFromLoad(chLoad->GetRaceNum()) == 0)
 		return;
 
