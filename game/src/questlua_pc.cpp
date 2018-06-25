@@ -35,7 +35,7 @@ extern int g_nPortalLimitTime;
 extern LPCLIENT_DESC db_clientdesc;
 const int ITEM_BROKEN_METIN_VNUM = 28960;
 
-namespace quest 
+namespace quest
 {
 	//
 	// "pc" Lua functions
@@ -74,7 +74,7 @@ namespace quest
 	{
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
 
-		if (!lua_isnumber(L, 1)) 
+		if (!lua_isnumber(L, 1))
 		{
 			sys_err("wrong skill index");
 			return 0;
@@ -88,7 +88,7 @@ namespace quest
 	{
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
 
-		if (!lua_isnumber(L, 1)) 
+		if (!lua_isnumber(L, 1))
 		{
 			sys_err("wrong map index");
 			return 0;
@@ -108,7 +108,7 @@ namespace quest
 	{
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
 
-		if (!lua_isnumber(L, 1)) 
+		if (!lua_isnumber(L, 1))
 		{
 			sys_err("wrong map index");
 			return 0;
@@ -180,12 +180,12 @@ namespace quest
 			return 1;
 		}
 		//END_PREVENT_HACK
-	
+
 		if ( test_server )
 			ch->ChatPacket( CHAT_TYPE_INFO, "pc_warp %d %d %d",(int)lua_tonumber(L,1),
 					(int)lua_tonumber(L,2),map_index );
 		ch->WarpSet((int)lua_tonumber(L, 1), (int)lua_tonumber(L, 2), map_index);
-		
+
 		lua_pushboolean(L, true);
 
 		return 1;
@@ -193,7 +193,7 @@ namespace quest
 
 	int pc_warp_local(lua_State * L)
 	{
-		if (!lua_isnumber(L, 1)) 
+		if (!lua_isnumber(L, 1))
 		{
 			sys_err("no map index argument");
 			return 0;
@@ -230,18 +230,18 @@ namespace quest
 		}
 
 		/*
-		int iPulse = thecore_pulse();	
+		int iPulse = thecore_pulse();
 		if ( pkChr->GetExchange() || pkChr->GetMyShop() || pkChr->GetShopOwner() || pkChr->IsOpenSafebox() )
 		{
-			pkChr->ChatPacket( CHAT_TYPE_INFO, LC_TEXT("°Å·¡Ã¢,Ã¢°í µîÀ» ¿¬ »óÅÂ¿¡¼­´Â ´Ù¸¥°÷À¸·Î ÀÌµ¿ÇÒ¼ö ¾ø½À´Ï´Ù" ));
+			pkChr->ChatPacket( CHAT_TYPE_INFO, LC_TEXT("ï¿½Å·ï¿½Ã¢,Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ò¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½" ));
 
 			return;
 		}
 		//PREVENT_PORTAL_AFTER_EXCHANGE
-		//±³È¯ ÈÄ ½Ã°£Ã¼Å©
+		//ï¿½ï¿½È¯ ï¿½ï¿½ ï¿½Ã°ï¿½Ã¼Å©
 		if ( iPulse - pkChr->GetExchangeTime()  < PASSES_PER_SEC(60) )
 		{
-			pkChr->ChatPacket( CHAT_TYPE_INFO, LC_TEXT("°Å·¡ ÈÄ 1ºÐ ÀÌ³»¿¡´Â ´Ù¸¥Áö¿ªÀ¸·Î ÀÌµ¿ ÇÒ ¼ö ¾ø½À´Ï´Ù." ) );
+			pkChr->ChatPacket( CHAT_TYPE_INFO, LC_TEXT("ï¿½Å·ï¿½ ï¿½ï¿½ 1ï¿½ï¿½ ï¿½Ì³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." ) );
 			return;
 		}
 		//END_PREVENT_PORTAL_AFTER_EXCHANGE
@@ -249,7 +249,7 @@ namespace quest
 		{
 			if ( iPulse - pkChr->GetMyShopTime() < PASSES_PER_SEC(60) )
 			{
-				pkChr->ChatPacket( CHAT_TYPE_INFO, LC_TEXT("°Å·¡ ÈÄ 1ºÐ ÀÌ³»¿¡´Â ´Ù¸¥Áö¿ªÀ¸·Î ÀÌµ¿ ÇÒ ¼ö ¾ø½À´Ï´Ù." ) );
+				pkChr->ChatPacket( CHAT_TYPE_INFO, LC_TEXT("ï¿½Å·ï¿½ ï¿½ï¿½ 1ï¿½ï¿½ ï¿½Ì³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." ) );
 				return;
 			}
 
@@ -399,19 +399,19 @@ namespace quest
 		int count = 0;
 
 		ch->GiveItemFromSpecialItemGroup(dwGroupVnum, dwVnums, dwCounts, item_gets, count);
-		
+
 		for (int i = 0; i < count; i++)
 		{
 			if (!item_gets[i])
 			{
 				if (dwVnums[i] == 1)
 				{
-					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("µ· %d ³ÉÀ» È¹µæÇß½À´Ï´Ù."), dwCounts[i]);
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("ï¿½ï¿½ %d ï¿½ï¿½ï¿½ï¿½ È¹ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½."), dwCounts[i]);
 				}
 				else if (dwVnums[i] == 2)
 				{
-					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("³ª¹«¿¡¼­ ºÎÅÍ ½ÅºñÇÑ ºûÀÌ ³ª¿É´Ï´Ù."));
-					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("%dÀÇ °æÇèÄ¡¸¦ È¹µæÇß½À´Ï´Ù."), dwCounts[i]);
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Åºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½É´Ï´ï¿½."));
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("%dï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ È¹ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½."), dwCounts[i]);
 				}
 			}
 		}
@@ -453,7 +453,7 @@ namespace quest
 
 		DWORD dwVnum;
 
-		if (lua_isnumber(L,2)) // ¹øÈ£ÀÎ°æ¿ì ¹øÈ£·Î ÁØ´Ù.
+		if (lua_isnumber(L,2)) // ï¿½ï¿½È£ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ø´ï¿½.
 			dwVnum = (int) lua_tonumber(L, 2);
 		else if (!ITEM_MANAGER::instance().GetVnum(lua_tostring(L, 2), dwVnum))
 		{
@@ -467,7 +467,7 @@ namespace quest
 		{
 			icount = (int)rint(lua_tonumber(L, 3));
 
-			if (icount <= 0) 
+			if (icount <= 0)
 			{
 				sys_err("QUEST Make item call error : wrong item count : %g", lua_tonumber(L, 2));
 				return 0;
@@ -493,7 +493,7 @@ namespace quest
 
 		DWORD dwVnum;
 
-		if (lua_isnumber(L, 1)) // ¹øÈ£ÀÎ°æ¿ì ¹øÈ£·Î ÁØ´Ù.
+		if (lua_isnumber(L, 1)) // ï¿½ï¿½È£ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ø´ï¿½.
 		{
 			dwVnum = (int) lua_tonumber(L, 1);
 		}
@@ -509,7 +509,7 @@ namespace quest
 		if (lua_isnumber(L,2) && lua_tonumber(L,2)>0)
 		{
 			icount = (int)rint(lua_tonumber(L,2));
-			if (icount<=0) 
+			if (icount<=0)
 			{
 				sys_err("QUEST Make item call error : wrong item count : %g", lua_tonumber(L,2));
 				lua_pushnumber (L, 0);
@@ -529,7 +529,7 @@ namespace quest
 		{
 			LogManager::instance().GoldBarLog(ch->GetPlayerID(), item->GetID(), QUEST, "quest: give_item2");
 		}
-		
+
 		if (NULL != item)
 			lua_pushnumber (L, item->GetID());
 		else
@@ -549,7 +549,7 @@ namespace quest
 
 		DWORD dwVnum;
 
-		if (lua_isnumber(L, 1)) // ¹øÈ£ÀÎ°æ¿ì ¹øÈ£·Î ÁØ´Ù.
+		if (lua_isnumber(L, 1)) // ï¿½ï¿½È£ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ø´ï¿½.
 		{
 			dwVnum = (int) lua_tonumber(L, 1);
 		}
@@ -563,7 +563,7 @@ namespace quest
 		if (lua_isnumber(L,2) && lua_tonumber(L,2)>0)
 		{
 			icount = (int)rint(lua_tonumber(L,2));
-			if (icount<=0) 
+			if (icount<=0)
 			{
 				sys_err("QUEST Make item call error : wrong item count : %g", lua_tonumber(L,2));
 				return 0;
@@ -585,7 +585,7 @@ namespace quest
 		{
 			LogManager::instance().GoldBarLog(ch->GetPlayerID(), item->GetID(), QUEST, "quest: give_item2");
 		}
-		
+
 		return 0;
 	}
 
@@ -749,43 +749,43 @@ namespace quest
 		return 1;
 	}
 
-	int pc_get_next_exp(lua_State* L)  
+	int pc_get_next_exp(lua_State* L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetNextExp());
 		return 1;
 	}
 
-	int pc_get_exp(lua_State* L)  
+	int pc_get_exp(lua_State* L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetExp());
 		return 1;
 	}
 
-	int pc_get_race(lua_State* L)  
+	int pc_get_race(lua_State* L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetRaceNum());
 		return 1;
 	}
 
-	int pc_change_sex(lua_State* L)  
+	int pc_change_sex(lua_State* L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->ChangeSex());
 		return 1;
 	}
 
-	int pc_get_job(lua_State* L)  
+	int pc_get_job(lua_State* L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetJob());
 		return 1;
 	}
 
-	int pc_get_max_sp(lua_State* L)  
+	int pc_get_max_sp(lua_State* L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetMaxSP());
 		return 1;
 	}
 
-	int pc_get_sp(lua_State * L)  
+	int pc_get_sp(lua_State * L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetSP());
 		return 1;
@@ -810,7 +810,7 @@ namespace quest
 
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
 
-		if (val > 0) // Áõ°¡½ÃÅ°´Â °ÍÀÌ¹Ç·Î ¹«Á¶°Ç ¼º°ø ¸®ÅÏ
+		if (val > 0) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			ch->PointChange(POINT_SP, val);
 		else if (val < 0)
 		{
@@ -827,25 +827,25 @@ namespace quest
 		return 1;
 	}
 
-	int pc_get_max_hp(lua_State * L)  
+	int pc_get_max_hp(lua_State * L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetMaxHP());
 		return 1;
 	}
 
-	int pc_get_hp(lua_State * L)  
+	int pc_get_hp(lua_State * L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetHP());
 		return 1;
 	}
 
-	int pc_get_level(lua_State * L)  
+	int pc_get_level(lua_State * L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetLevel());
 		return 1;
 	}
 
-	int pc_set_level(lua_State * L)  
+	int pc_set_level(lua_State * L)
 	{
 		if (!lua_isnumber(L, 1))
 		{
@@ -862,22 +862,22 @@ namespace quest
 
 			PC* pPC = CQuestManager::instance().GetCurrentPC();
 			LogManager::instance().QuestRewardLog(pPC->GetCurrentQuestName().c_str(), ch->GetPlayerID(), ch->GetLevel(), newLevel, 0);
-			
-			//Æ÷ÀÎÆ® : ½ºÅ³, ¼­ºê½ºÅ³, ½ºÅÈ
+
+			//ï¿½ï¿½ï¿½ï¿½Æ® : ï¿½ï¿½Å³, ï¿½ï¿½ï¿½ê½ºÅ³, ï¿½ï¿½ï¿½ï¿½
 			ch->PointChange(POINT_SKILL, newLevel - ch->GetLevel());
 			ch->PointChange(POINT_SUB_SKILL, newLevel < 10 ? 0 : newLevel - MAX(ch->GetLevel(), 9));
 			ch->PointChange(POINT_STAT, ((MINMAX(1, newLevel, 90) - ch->GetLevel()) * 3) + ch->GetPoint(POINT_LEVEL_STEP));
-			//·¹º§
+			//ï¿½ï¿½ï¿½ï¿½
 			ch->PointChange(POINT_LEVEL, newLevel - ch->GetLevel());
 			//HP, SP
 			ch->SetRandomHP((newLevel - 1) * number(JobInitialPoints[ch->GetJob()].hp_per_lv_begin, JobInitialPoints[ch->GetJob()].hp_per_lv_end));
 			ch->SetRandomSP((newLevel - 1) * number(JobInitialPoints[ch->GetJob()].sp_per_lv_begin, JobInitialPoints[ch->GetJob()].sp_per_lv_end));
 
 
-			// È¸º¹
+			// È¸ï¿½ï¿½
 			ch->PointChange(POINT_HP, ch->GetMaxHP() - ch->GetHP());
 			ch->PointChange(POINT_SP, ch->GetMaxSP() - ch->GetSP());
-			
+
 			ch->ComputePoints();
 			ch->PointsPacket();
 			ch->SkillLevelPacket();
@@ -911,7 +911,7 @@ namespace quest
 	}
 
 	int pc_get_wear(lua_State * L)
-	{		
+	{
 		if (!lua_isnumber(L, 1))
 		{
 			sys_err("QUEST wrong set flag");
@@ -932,13 +932,13 @@ namespace quest
 	}
 
 	int pc_get_money(lua_State * L)
-	{ 
+	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetGold());
 		return 1;
 	}
 
-	// 20050725.myevan.ÀºµÐÀÇ ¸ÁÅä »ç¿ëÁß È¥¼® ¼ö·Ã½Ã ¼±¾ÇÄ¡°¡ µÎ¹è ¼Ò¸ðµÇ´Â ¹ö±×°¡ ¹ß»ýÇØ
-	// ½ÇÁ¦ ¼±¾ÇÄ¡¸¦ ÀÌ¿ëÇØ °è»êÀ» ÇÏ°Ô ÇÑ´Ù.
+	// 20050725.myevan.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¥ï¿½ï¿½ ï¿½ï¿½ï¿½Ã½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Î¹ï¿½ ï¿½Ò¸ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½×°ï¿½ ï¿½ß»ï¿½ï¿½ï¿½
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½ ï¿½Ñ´ï¿½.
 	int pc_get_real_alignment(lua_State* L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetRealAlignment()/10);
@@ -1151,14 +1151,14 @@ namespace quest
 
 		DWORD exp = (DWORD)((exp_table[MINMAX(0, lev, PLAYER_EXP_TABLE_MAX)] * proc) / 100);
 		PC * pPC = CQuestManager::instance().GetCurrentPC();
-		
+
 		LogManager::instance().QuestRewardLog(pPC->GetCurrentQuestName().c_str(), ch->GetPlayerID(), ch->GetLevel(), exp, 0);
 
 		pPC->GiveExp(lua_tostring(L, 1), exp);
 		return 0;
 	}
 
-	int pc_get_empire(lua_State* L)  
+	int pc_get_empire(lua_State* L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetEmpire());
 		return 1;
@@ -1193,7 +1193,7 @@ namespace quest
 		return 0;
 	}
 
-	int pc_get_skillgroup(lua_State* L)  
+	int pc_get_skillgroup(lua_State* L)
 	{
 		lua_pushnumber(L, CQuestManager::instance().GetCurrentCharacterPtr()->GetSkillGroup());
 		return 1;
@@ -1264,7 +1264,7 @@ namespace quest
 		ch->RemoveAffect(AFFECT_MOUNT);
 		ch->RemoveAffect(AFFECT_MOUNT_BONUS);
 
-		// ¸»ÀÌ ¼ÒÈ¯µÇ¾î µû¶ó´Ù´Ï´Â »óÅÂ¶ó¸é ¸»ºÎÅÍ ¾ø¾Ú
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù´Ï´ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (ch->GetHorse())
 			ch->HorseSummon(false);
 
@@ -1302,7 +1302,7 @@ namespace quest
 
 			}
 		}
-		
+
 		return 0;
 	}
 
@@ -1402,8 +1402,8 @@ namespace quest
 			if (!item)
 				continue;
 
-			if (item->GetType() == ITEM_USE && 
-					item->GetSubType() == USE_TALISMAN && 
+			if (item->GetType() == ITEM_USE &&
+					item->GetSubType() == USE_TALISMAN &&
 					(item->GetValue(0) == 1 || item->GetValue(0) == 2))
 			{
 				int x = item->GetSocket(0);
@@ -1457,8 +1457,8 @@ namespace quest
 			if (!item)
 				continue;
 
-			if (item->GetType() == ITEM_USE && 
-					item->GetSubType() == USE_TALISMAN && 
+			if (item->GetType() == ITEM_USE &&
+					item->GetSubType() == USE_TALISMAN &&
 					(item->GetValue(0) == 1 || item->GetValue(0) == 2))
 			{
 				int item_x = item->GetSocket(0);
@@ -1532,7 +1532,7 @@ namespace quest
 
 		if (pct == 100 || number(1, 100) <= pct)
 		{
-			// °³·® ¼º°ø
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			lua_pushboolean(L, 1);
 
 			LPITEM pkNewItem = ITEM_MANAGER::instance().CreateItem(item->GetRefinedVnum(), 1, 0, false);
@@ -1559,7 +1559,7 @@ namespace quest
 
 				ITEM_MANAGER::instance().RemoveItem(item, "REMOVE (REFINE SUCCESS)");
 
-				// some tuits need here -_- pkNewItem->AddToCharacter(this, bCell); 
+				// some tuits need here -_- pkNewItem->AddToCharacter(this, bCell);
 				pkNewItem->EquipTo(ch, cell);
 
 				ITEM_MANAGER::instance().FlushDelayedSave(pkNewItem);
@@ -1569,7 +1569,7 @@ namespace quest
 		}
 		else
 		{
-			// °³·® ½ÇÆÐ
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			lua_pushboolean(L, 0);
 		}
 
@@ -1606,7 +1606,7 @@ namespace quest
 		pdw[1] = 1;
 		pdw[2] = q.GetEventFlag("lotto_round");
 
-		// ÃßÃ·¼­´Â ¼ÒÄÏÀ» ¼³Á¤ÇÑ´Ù
+		// ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 		DBManager::instance().ReturnQuery(QID_LOTTO, ch->GetPlayerID(), pdw,
 				"INSERT INTO lotto_list VALUES(0, 'server%s', %u, NOW())",
 				get_table_postfix(), ch->GetPlayerID());
@@ -1667,7 +1667,7 @@ namespace quest
 		{
 			CQuestManager::instance().GetPC(new_ch->GetPlayerID());
 
-			lua_pushnumber(L, (DWORD)ch->GetVID());
+			lua_pushnumber(L, ch ? (DWORD)ch->GetVID() : 0);
 		}
 		else
 		{
@@ -1815,7 +1815,7 @@ namespace quest
 		return 0;
 	}
 
-	// RESET_ONE_SKILL	
+	// RESET_ONE_SKILL
 	int pc_clear_one_skill(lua_State* L)
 	{
 		int vnum = (int)lua_tonumber(L, 1);
@@ -1842,7 +1842,7 @@ namespace quest
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
 
 		lua_pushboolean(L, ch->GetQuestFlag("skill_group_clear.clear") == 1);
-	
+
 		return 1;
 	}
 
@@ -1855,32 +1855,32 @@ namespace quest
 		return 0;
 	}
 
-	//ÅÚ·¹Æ÷Æ® 
+	//ï¿½Ú·ï¿½ï¿½ï¿½Æ®
 	int pc_teleport ( lua_State * L )
 	{
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
-		int x=0,y=0;	
+		int x=0,y=0;
 		if ( lua_isnumber(L, 1) )
 		{
-			// Áö¿ª¸í ¿öÇÁ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			const int TOWN_NUM = 10;
 			struct warp_by_town_name
 			{
 				const char* name;
 				DWORD x;
 				DWORD y;
-			} ws[TOWN_NUM] = 
+			} ws[TOWN_NUM] =
 			{
-				{"¿µ¾ÈÀ¾¼º",	4743,	9548},
-				{"ÀÓÁö°î",		3235,	9086},
-				{"ÀÚ¾çÇö",		3531,	8829},
-				{"Á¶¾ÈÀ¾¼º",	638,	1664},
-				{"½Â·æ°î",		1745,	1909},
-				{"º¹Á¤Çö",		1455,	2400},
-				{"Æò¹«À¾¼º",	9599,	2692},
-				{"¹æ»ê°î",		8036,	2984},
-				{"¹Ú¶óÇö",		8639,	2460},
-				{"¼­ÇÑ»ê",		4350,	2143},
+				{"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",	4743,	9548},
+				{"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",		3235,	9086},
+				{"ï¿½Ú¾ï¿½ï¿½ï¿½",		3531,	8829},
+				{"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",	638,	1664},
+				{"ï¿½Â·ï¿½ï¿½ï¿½",		1745,	1909},
+				{"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",		1455,	2400},
+				{"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",	9599,	2692},
+				{"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",		8036,	2984},
+				{"ï¿½Ú¶ï¿½ï¿½ï¿½",		8639,	2460},
+				{"ï¿½ï¿½ï¿½Ñ»ï¿½",		4350,	2143},
 			};
 			int idx  = (int)lua_tonumber(L, 1);
 
@@ -1996,7 +1996,7 @@ teleport_area:
 		int	premium_type	= 0;
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
 
-		if (!lua_isnumber(L, 1)) 
+		if (!lua_isnumber(L, 1))
 		{
 			sys_err("wrong premium index (is not number)");
 			return 0;
@@ -2023,7 +2023,7 @@ teleport_area:
 
 		lua_pushnumber(L, remain_seconds);
 		return 1;
-	}	
+	}
 
 	int pc_send_block_mode(lua_State* L)
 	{
@@ -2037,7 +2037,7 @@ teleport_area:
 	int pc_change_empire(lua_State* L)
 	{
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
-		
+
 		lua_pushnumber(L, ch->ChangeEmpire((unsigned char)lua_tonumber(L, 1)));
 
 		return 1;
@@ -2060,16 +2060,16 @@ teleport_area:
 
 		return 0;
 	}
-	
+
 	int pc_change_name(lua_State* L)
 	{
-		// ¸®ÅÏ°ª
-		//		0: »õÀÌ¸§À» ¼³Á¤ÇÑ µÚ ·Î±×¾Æ¿ôÀ» ¾ÈÇßÀ½
-		//		1: ½ºÅ©¸³Æ®¿¡¼­ ¹®ÀÚ¿­ÀÌ ³Ñ¾î¿ÀÁö ¾Ê¾ÒÀ½
-		//		2: check_name À» Åë°úÇÏÁö ¸øÇßÀ½
-		//		3: ÀÌ¹Ì °°Àº ÀÌ¸§ÀÌ »ç¿ëÁß
-		//		4: ¼º°ø
-		//		5: ÇØ´ç ±â´É Áö¿øÇÏÁö ¾ÊÀ½
+		// ï¿½ï¿½ï¿½Ï°ï¿½
+		//		0: ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Î±×¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//		1: ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾ï¿½ï¿½ï¿½
+		//		2: check_name ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//		3: ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//		4: ï¿½ï¿½ï¿½ï¿½
+		//		5: ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if ( LC_IsEurope() )
 		{
 			lua_pushnumber(L, 5);
@@ -2109,7 +2109,7 @@ teleport_area:
 			int	count = 0;
 			str_to_number(count, row[0]);
 
-			// ÀÌ¹Ì ÇØ´ç ÀÌ¸§À» °¡Áø Ä³¸¯ÅÍ°¡ ÀÖÀ½
+			// ï¿½Ì¹ï¿½ ï¿½Ø´ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if ( count != 0 )
 			{
 				lua_pushnumber(L, 3);
@@ -2277,7 +2277,7 @@ teleport_area:
 		ch->PointsPacket();
 		return 1;
 	}
-	
+
 	int pc_get_st( lua_State* L )
 	{
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
@@ -2301,7 +2301,7 @@ teleport_area:
 		ch->PointsPacket();
 		return 1;
 	}
-	
+
 	int pc_get_dx( lua_State* L )
 	{
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
@@ -2360,8 +2360,8 @@ teleport_area:
 
 		int idx = 1;
 
-		// ¿ëÈ¥¼® ½½·ÔÀº ÇÒ ÇÊ¿ä ¾øÀ» µí.
-		// ÀÌ ÇÔ¼ö´Â Å»¼®¼­¿ë ÇÔ¼öÀÎ µí ÇÏ´Ù.
+		// ï¿½ï¿½È¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
+		// ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï´ï¿½.
 		for ( int i=0; i < INVENTORY_MAX_NUM + WEAR_MAX_NUM; i++ )
 		{
 			LPITEM pItem = pChar->GetInventoryItem(i);
@@ -2656,7 +2656,7 @@ teleport_area:
 		}
 
 		return count;
-	}		
+	}
 
 	int pc_charge_cash(lua_State * L)
 	{
@@ -2666,7 +2666,7 @@ teleport_area:
 		std::string strChargeType = lua_isstring(L, 2) ? lua_tostring(L, 2) : "";
 
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
-		
+
 		if (NULL == ch || NULL == ch->GetDesc() || 1 > amount || 50000 < amount)
 		{
 			lua_pushboolean(L, 0);
@@ -2707,10 +2707,10 @@ teleport_area:
 
 		sys_log(0, "QUEST [award] item %d to login %s", dwVnum, ch->GetDesc()->GetAccountTable().login);
 
-		DBManager::instance().Query("INSERT INTO item_award (login, vnum, count, given_time, why, mall)select '%s', %d, %d, now(), '%s', 1 from DUAL where not exists (select login, why from item_award where login = '%s' and why  = '%s') ;", 
+		DBManager::instance().Query("INSERT INTO item_award (login, vnum, count, given_time, why, mall)select '%s', %d, %d, now(), '%s', 1 from DUAL where not exists (select login, why from item_award where login = '%s' and why  = '%s') ;",
 			ch->GetDesc()->GetAccountTable().login,
-			dwVnum, 
-			icount, 
+			dwVnum,
+			icount,
 			lua_tostring(L,3),
 			ch->GetDesc()->GetAccountTable().login,
 			lua_tostring(L,3));
@@ -2735,10 +2735,10 @@ teleport_area:
 
 		sys_log(0, "QUEST [award] item %d to login %s", dwVnum, ch->GetDesc()->GetAccountTable().login);
 
-		DBManager::instance().Query("INSERT INTO item_award (login, vnum, count, given_time, why, mall, socket0, socket1, socket2)select '%s', %d, %d, now(), '%s', 1, %s, %s, %s from DUAL where not exists (select login, why from item_award where login = '%s' and why  = '%s') ;", 
+		DBManager::instance().Query("INSERT INTO item_award (login, vnum, count, given_time, why, mall, socket0, socket1, socket2)select '%s', %d, %d, now(), '%s', 1, %s, %s, %s from DUAL where not exists (select login, why from item_award where login = '%s' and why  = '%s') ;",
 			ch->GetDesc()->GetAccountTable().login,
-			dwVnum, 
-			icount, 
+			dwVnum,
+			icount,
 			lua_tostring(L,3),
 			lua_tostring(L,4),
 			lua_tostring(L,5),
@@ -2750,7 +2750,7 @@ teleport_area:
 		return 1;
 	}
 
-	int pc_get_informer_type(lua_State* L)	//µ¶ÀÏ ¼±¹° ±â´É
+	int pc_get_informer_type(lua_State* L)	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	{
 		LPCHARACTER pChar = CQuestManager::instance().GetCurrentCharacterPtr();
 
@@ -2796,7 +2796,7 @@ teleport_area:
 
 		lua_pushnumber(L, iDeltaPercent);
 		lua_pushnumber(L, iRandRange);
-		
+
 		return 2;
 	}
 
@@ -2806,17 +2806,17 @@ teleport_area:
 		ch->block_exp = true;
 		return 0;
 	}
-		
+
 	int _unblock_exp(lua_State* L)
 	{
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
 		ch->block_exp = false;
 		return 0;
-	}  
+	}
 
 	void RegisterPCFunctionTable()
 	{
-		luaL_reg pc_functions[] = 
+		luaL_reg pc_functions[] =
 		{
 			{ "get_wear",		pc_get_wear			},
 			{ "get_player_id",	pc_get_player_id	},
@@ -2918,8 +2918,8 @@ teleport_area:
 			{ "warp_to_guild_war_observer_position", pc_warp_to_guild_war_observer_position	},
 			{ "give_item_from_special_item_group", pc_give_item_from_special_item_group	},
 			{ "learn_grand_master_skill", pc_learn_grand_master_skill	},
-			{ "is_skill_book_no_delay",	pc_is_skill_book_no_delay}, 
-			{ "remove_skill_book_no_delay",	pc_remove_skill_book_no_delay}, 
+			{ "is_skill_book_no_delay",	pc_is_skill_book_no_delay},
+			{ "remove_skill_book_no_delay",	pc_remove_skill_book_no_delay},
 
 			{ "enough_inventory",	pc_enough_inventory	},
 			{ "get_horse_level",	pc_get_horse_level	}, // TO BE DELETED XXX
@@ -2964,9 +2964,9 @@ teleport_area:
             { "give_polymorph_book",    pc_give_polymorph_book  },
             { "upgrade_polymorph_book", pc_upgrade_polymorph_book },
             { "get_premium_remain_sec", pc_get_premium_remain_sec },
-   
+
 			{ "send_block_mode",		pc_send_block_mode	},
-			
+
 			{ "change_empire",			pc_change_empire	},
 			{ "get_change_empire_count",	pc_get_change_empire_count	},
 			{ "set_change_empire_count",	pc_set_change_empire_count	},
@@ -3006,22 +3006,22 @@ teleport_area:
 			{ "get_sig_items",		pc_get_sig_items	},
 
 			{ "charge_cash",		pc_charge_cash		},
-			
-			{ "get_informer_type",	pc_get_informer_type	},	//µ¶ÀÏ ¼±¹° ±â´É
+
+			{ "get_informer_type",	pc_get_informer_type	},	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			{ "get_informer_item",  pc_get_informer_item	},
 
-			{ "give_award",			pc_give_award			},	//ÀÏº» °èÁ¤´ç ÇÑ¹ø¾¿ ±Ý±« Áö±Þ
-			{ "give_award_socket",	pc_give_award_socket	},	//¸ô ÀÎº¥Åä¸®¿¡ ¾ÆÀÌÅÛ Áö±Þ. ¼ÒÄÏ ¼³Á¤À» À§ÇÑ ÇÔ¼ö.
+			{ "give_award",			pc_give_award			},	//ï¿½Ïºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½Ý±ï¿½ ï¿½ï¿½ï¿½ï¿½
+			{ "give_award_socket",	pc_give_award_socket	},	//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½.
 
-			{ "block_exp",			_block_exp	},    //¸Block EXP by kutsuya
+			{ "block_exp",			_block_exp	},    //ï¿½Block EXP by kutsuya
 
-			{ "unblock_exp",		_unblock_exp	},    //¸Unblock EXP by kutsuya
+			{ "unblock_exp",		_unblock_exp	},    //ï¿½Unblock EXP by kutsuya
 
-			{ "get_killee_drop_pct",	pc_get_killee_drop_pct	}, /* mob_vnum.kill ÀÌº¥Æ®¿¡¼­ killee¿Í pc¿ÍÀÇ level Â÷ÀÌ, pcÀÇ ÇÁ¸®¹Ì¾ö µå¶ø·ü µîµîÀ» °í·ÁÇÑ ¾ÆÀÌÅÛ µå¶ø È®·ü.
-																    * return °ªÀº (ºÐÀÚ, ºÐ¸ð).
-																    * (¸»ÀÌ º¹ÀâÇÑµ¥, CreateDropItemÀÇ GetDropPctÀÇ iDeltaPercent, iRandRange¸¦ returnÇÑ´Ù°í º¸¸é µÊ.)
-																	* (ÀÌ ¸»ÀÌ ´õ ¾î·Á¿ï¶ó³ª ¤Ð¤Ð)
-																	* ÁÖÀÇ»çÇ× : kill event¿¡¼­¸¸ »ç¿ëÇÒ °Í!
+			{ "get_killee_drop_pct",	pc_get_killee_drop_pct	}, /* mob_vnum.kill ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ killeeï¿½ï¿½ pcï¿½ï¿½ï¿½ï¿½ level ï¿½ï¿½ï¿½ï¿½, pcï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½.
+																    * return ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½, ï¿½Ð¸ï¿½).
+																    * (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñµï¿½, CreateDropItemï¿½ï¿½ GetDropPctï¿½ï¿½ iDeltaPercent, iRandRangeï¿½ï¿½ returnï¿½Ñ´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.)
+																	* (ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¤ï¿½)
+																	* ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ : kill eventï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½!
 																	*/
 
 			{ NULL,			NULL			}
