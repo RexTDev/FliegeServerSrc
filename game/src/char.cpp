@@ -3996,6 +3996,10 @@ void CHARACTER::mining(LPCHARACTER chLoad)
 
 void CHARACTER::fishing()
 {
+
+	if (!IsNearWater())
+		return;
+
 	if (m_pkFishingEvent)
 	{
 		fishing_take();
@@ -7289,4 +7293,19 @@ DWORD CHARACTER::GetNextExp() const
 int	CHARACTER::GetSkillPowerByLevel(int level, bool bMob) const
 {
 	return CTableBySkill::instance().GetSkillPowerByLevelFromType(GetJob(), GetSkillGroup(), MINMAX(0, level, SKILL_MAX_LEVEL), bMob);
+}
+
+bool CHARACTER::IsNearWater() const
+{
+	if (!GetSectree())
+		return false;
+	for (int x = -1; x <= 1; ++x)
+	{
+		for (int y = -1; y <= 1; ++y)
+		{
+			if (IS_SET(GetSectree()->GetAttribute(GetX() + x * 100, GetY() + y * 100), ATTR_WATER))
+				return true;
+		}
+	}
+	return false;
 }
