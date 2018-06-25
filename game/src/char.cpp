@@ -5316,7 +5316,7 @@ void CHARACTER::WarpEnd()
 
 	if (index > 10000)
 		index /= 10000;
-
+/*
 	if (!map_allow_find(index))
 	{
 		// �� ������ ������ �� �����Ƿ� �����ϱ� �� ��ǥ�� �ǵ�����.
@@ -5324,6 +5324,9 @@ void CHARACTER::WarpEnd()
 		GetDesc()->SetPhase(PHASE_CLOSE);
 		return;
 	}
+	*///	WRONG INDEX FIX
+	if (!map_allow_find(index))
+		GoHome();
 
 	sys_log(0, "WarpEnd %s %d %u %u", GetName(), m_lWarpMapIndex, m_posWarp.x, m_posWarp.y);
 
