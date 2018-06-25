@@ -6094,6 +6094,15 @@ void CHARACTER::MonsterChat(BYTE bMonsterChatType)
 
 void CHARACTER::SetQuestNPCID(DWORD vid)
 {
+	if (vid && m_dwQuestNPCVID)
+	{
+		quest::PC* pPC = quest::CQuestManager::instance().GetPCForce(GetPlayerID());
+		if (pPC && pPC->IsRunning())
+		{
+			sys_err("cannot reset quest npc id - already running quest [%u %s]", GetPlayerID(), GetName());
+			return;
+		}
+	}
 	m_dwQuestNPCVID = vid;
 }
 
