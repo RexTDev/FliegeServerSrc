@@ -2620,7 +2620,10 @@ bool CHARACTER::Sync(long x, long y)
 		if (GetDesc())
 		{
 			sys_err("cannot find tree at %d %d (name: %s)", x, y, GetName());
-			GetDesc()->SetPhase(PHASE_CLOSE);
+			//GetDesc()->SetPhase(PHASE_CLOSE);
+			x = GetX();
+			y = GetY();
+			new_tree = GetSectree();
 		}
 		else
 		{
