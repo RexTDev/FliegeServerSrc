@@ -159,8 +159,8 @@ void CShop::SetShopItems(TShopItemTable * pTable, BYTE bItemCount)
 		if (item.pkItem)
 		{
 			item.vnum = pkItem->GetVnum();
-			item.count = pkItem->GetCount(); // PC ¼¥ÀÇ °æ¿ì ¾ÆÀÌÅÛ °³¼ö´Â ÁøÂ¥ ¾ÆÀÌÅÛÀÇ °³¼ö¿©¾ß ÇÑ´Ù.
-			item.price = pTable->price; // °¡°Ýµµ »ç¿ëÀÚ°¡ Á¤ÇÑ´ë·Î..
+			item.count = pkItem->GetCount(); // PC ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
+			item.price = pTable->price; // ï¿½ï¿½ï¿½Ýµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½..
 			item.itemid	= pkItem->GetID();
 		}
 		else
@@ -229,17 +229,19 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 					ch->GetPlayerID(),
 					m_pkPC->GetPlayerID());
 
-			return false;
+			return SHOP_SUBHEADER_GC_SOLD_OUT;
 		}
 
-		if ((pkSelectedItem->GetOwner() != m_pkPC))
+		if (pkSelectedItem->GetOwner() != m_pkPC)
 		{
 			sys_log(0, "Shop::Buy : Critical: This user seems to be a hacker : invalid pcshop item : BuyerPID:%d SellerPID:%d",
 					ch->GetPlayerID(),
 					m_pkPC->GetPlayerID());
 
-			return false;
+			return SHOP_SUBHEADER_GC_SOLD_OUT;
 		}
+	}
+
 	}
 
 	DWORD dwPrice = r_item.price;
@@ -255,7 +257,7 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 
 	LPITEM item;
 
-	if (m_pkPC) // ÇÇ¾¾°¡ ¿î¿µÇÏ´Â ¼¥Àº ÇÇ¾¾°¡ ½ÇÁ¦ ¾ÆÀÌÅÛÀ» °¡Áö°íÀÖ¾î¾ß ÇÑ´Ù.
+	if (m_pkPC) // ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½î¿µï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 		item = r_item.pkItem;
 	else
 		item = ITEM_MANAGER::instance().CreateItem(r_item.vnum, r_item.count);
@@ -298,7 +300,7 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 
 	ch->PointChange(POINT_GOLD, -dwPrice, false);
 
-	//¼¼±Ý °è»ê
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	DWORD dwTax = 0;
 	int iVal = 0;
 
@@ -316,7 +318,7 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 		{
 			iVal = 3;
 			dwTax = dwPrice * iVal / 100;
-			dwPrice = dwPrice - dwTax;			
+			dwPrice = dwPrice - dwTax;
 		}
 	}
 	else
@@ -338,13 +340,13 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 		}
 	}
 
-	// »óÁ¡¿¡¼­ »ì‹š ¼¼±Ý 5%
-	if (!m_pkPC) 
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ì‹š ï¿½ï¿½ï¿½ï¿½ 5%
+	if (!m_pkPC)
 	{
 		CMonarch::instance().SendtoDBAddMoney(dwTax, ch->GetEmpire(), ch);
 	}
 
-	// ±ºÁÖ ½Ã½ºÅÛ : ¼¼±Ý Â¡¼ö
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ã½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ Â¡ï¿½ï¿½
 	if (m_pkPC)
 	{
 		m_pkPC->SyncQuickslot(QUICKSLOT_TYPE_ITEM, item->GetCell(), 255);
@@ -364,14 +366,14 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 				LogManager::instance().GoldBarLog(ch->GetPlayerID(), item->GetID(), SHOP_BUY, buf);
 				LogManager::instance().GoldBarLog(m_pkPC->GetPlayerID(), item->GetID(), SHOP_SELL, buf);
 			}
-			
+
 			item->RemoveFromCharacter();
 			if (item->IsDragonSoul())
 				item->AddToCharacter(ch, TItemPos(DRAGON_SOUL_INVENTORY, iEmptyPos));
 			else
 				item->AddToCharacter(ch, TItemPos(INVENTORY, iEmptyPos));
 			ITEM_MANAGER::instance().FlushDelayedSave(item);
-			
+
 
 			snprintf(buf, sizeof(buf), "%s %u(%s) %u %u", item->GetName(), m_pkPC->GetPlayerID(), m_pkPC->GetName(), dwPrice, item->GetCount());
 			LogManager::instance().ItemLog(ch, item, "SHOP_BUY", buf);
@@ -386,7 +388,7 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 		m_pkPC->PointChange(POINT_GOLD, dwPrice, false);
 
 		if (iVal > 0)
-			m_pkPC->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("ÆÇ¸Å±Ý¾×ÀÇ %d %% °¡ ¼¼±ÝÀ¸·Î ³ª°¡°ÔµË´Ï´Ù"), iVal);
+			m_pkPC->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("ï¿½Ç¸Å±Ý¾ï¿½ï¿½ï¿½ %d %% ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ÔµË´Ï´ï¿½"), iVal);
 
 		CMonarch::instance().SendtoDBAddMoney(dwTax, m_pkPC->GetEmpire(), m_pkPC);
 	}
@@ -446,7 +448,7 @@ bool CShop::AddGuest(LPCHARACTER ch, DWORD owner_vid, bool bOtherEmpire)
 
 		//HIVALUE_ITEM_EVENT
 		if (item.vnum == 70024 || item.vnum == 70035)
-		{              
+		{
 			continue;
 		}
 		//END_HIVALUE_ITEM_EVENT
